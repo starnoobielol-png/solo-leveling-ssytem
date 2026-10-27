@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+
+    <title>
+        Solo Leveling System
+    </title>
+
+
+    <!-- PWA -->
+
+    <meta
+        name="theme-color"
+        content="#050816"
+    >
+
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent"
+    >
+
+
+    <meta
+        name="apple-mobile-web-app-title"
+        content="Leveling"
+    >
+
+
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
+
+
+    <link
+        rel="apple-touch-icon"
+        href="icons/icon-192.png"
+    >
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <main class="app">
+
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <header class="hero">
+
+            <p class="system-text">
+                SYSTEM
+            </p>
+
+            <h1>
+                Daily Quest
+            </h1>
+
+            <p
+                class="date"
+                id="dateText"
+            ></p>
+
+        </header>
+
+
+
+        <!-- =========================
+             PLAYER / XP
+        ========================== -->
+
+        <section class="player-card">
+
+
+            <div class="level-area">
+
+                <p class="small-text">
+                    LEVEL
+                </p>
+
+                <h2 id="levelText">
+                    1
+                </h2>
+
+            </div>
+
+
+            <div class="xp-area">
+
+
+                <div class="xp-info">
+
+                    <span>
+                        XP
+                    </span>
+
+                    <span id="xpText">
+                        0 / 100
+                    </span>
+
+                </div>
+
+
+                <div class="xp-bar">
+
+                    <div
+                        class="xp-progress"
+                        id="xpProgress"
+                    ></div>
+
+                </div>
+
+
+                <div class="player-bottom-info">
+
+                    <span id="totalXPText">
+                        Total XP: 0
+                    </span>
+
+                    <span class="token-mini">
+
+                        ◈
+
+                        <span id="topTokenText">
+                            0
+                        </span>
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             DAILY QUESTS
+        ========================== -->
+
+        <section class="quest-section">
+
+
+            <div class="section-heading">
+
+
+                <div>
+
+                    <p class="small-text">
+                        REQUIRED
+                    </p>
+
+                    <h2>
+                        Daily Quests
+                    </h2>
+
+                </div>
+
+
+                <div class="streak">
+
+                    🔥
+
+                    <span id="streakText">
+                        0
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <div id="questList"></div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             SIDE QUESTS
+        ========================== -->
+
+        <section
+            class="quest-section side-quest-section"
+        >
+
+
+            <div class="section-heading">
+
+
+                <div>
+
+                    <p class="small-text">
+                        OPTIONAL
+                    </p>
+
+                    <h2>
+                        Side Quests
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+            <div id="sideQuestList"></div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             STATS
+        ========================== -->
+
+        <section class="stats-section">
+
+
+            <div class="section-heading">
+
+
+                <div>
+
+                    <p class="small-text">
+                        CHARACTER
+                    </p>
+
+                    <h2>
+                        Stats
+                    </h2>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="stats">
+
+
+                <div class="stat">
+
+                    <span>
+                        STR
+                    </span>
+
+                    <strong id="strengthStat">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <span>
+                        END
+                    </span>
+
+                    <strong id="enduranceStat">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <span>
+                        DISC
+                    </span>
+
+                    <strong id="disciplineStat">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <span>
+                        INT
+                    </span>
+
+                    <strong id="intelligenceStat">
+                        0
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             REWARD SHOP
+        ========================== -->
+
+        <section class="reward-shop">
+
+
+            <div class="reward-shop-header">
+
+
+                <div>
+
+                    <p class="small-text">
+                        LEVEL REWARDS
+                    </p>
+
+                    <h2>
+                        Reward Shop
+                    </h2>
+
+                </div>
+
+
+                <div class="token-display">
+
+                    <span class="token-symbol">
+                        ◈
+                    </span>
+
+                    <div>
+
+                        <span class="token-label">
+                            TOKENS
+                        </span>
+
+                        <strong id="tokenCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <p class="reward-description">
+                Du får 1 token varje gång du går upp i level.
+                Spara tokens eller använd dem på en reward.
+            </p>
+
+
+            <div
+                class="shop-list"
+                id="shopList"
+            ></div>
+
+
+            <p
+                class="shop-message"
+                id="shopMessage"
+            ></p>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             PERFECT DAY
+        ========================== -->
+
+        <section
+            class="completion-card"
+            id="completionCard"
+        >
+
+            <p>
+                DAILY QUEST COMPLETE
+            </p>
+
+            <h2>
+                +20 BONUS XP
+            </h2>
+
+        </section>
+
+
+
+        <!-- =========================
+             TEST RESET
+        ========================== -->
+
+        <section class="test-section">
+
+            <button
+                id="resetButton"
+                class="reset-button"
+                type="button"
+            >
+                Reset Test Data
+            </button>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         LEVEL UP POPUP
+    ========================== -->
+
+    <div
+        class="level-up-overlay"
+        id="levelUpOverlay"
+        aria-hidden="true"
+    >
+
+
+        <div
+            class="level-up-popup"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="levelUpTitle"
+        >
+
+
+            <p class="system-text">
+                SYSTEM
+            </p>
+
+
+            <p class="level-up-subtitle">
+                PLAYER LEVEL INCREASED
+            </p>
+
+
+            <h2 id="levelUpTitle">
+                LEVEL UP
+            </h2>
+
+
+            <div
+                class="level-change"
+                id="levelChangeText"
+            >
+                LEVEL 1 → LEVEL 2
+            </div>
+
+
+            <div class="level-up-reward">
+
+                <span>
+                    REWARD ACQUIRED
+                </span>
+
+                <strong id="levelRewardText">
+                    +1 TOKEN
+                </strong>
+
+            </div>
+
+
+            <div
+                class="popup-token-total"
+                id="popupTokenTotal"
+            >
+                Total Tokens: 1
+            </div>
+
+
+            <button
+                id="levelUpContinueButton"
+                class="level-up-button"
+                type="button"
+            >
+                Continue
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- XP ANIMATION CONTAINER -->
+
+    <div
+        class="xp-animation-area"
+        id="xpAnimationArea"
+        aria-live="polite"
+    ></div>
+
+
+
+    <script src="app.js"></script>
+
+
+</body>
+
+</html>
